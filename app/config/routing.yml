@@ -1,0 +1,5 @@
+dp_observer:
+    resource: "@DPObserverBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
