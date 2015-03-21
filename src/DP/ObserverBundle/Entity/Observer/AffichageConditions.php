@@ -30,6 +30,11 @@ class AffichageConditions implements Observer
     {
         return $this->pression;
     }
+    
+    function setCurrentPressure($currentPressure)
+    {
+        $this->currentPressure = $currentPressure;
+    }
 
     public function __construct(Observable $observable)
     {

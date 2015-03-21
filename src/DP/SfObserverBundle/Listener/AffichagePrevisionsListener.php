@@ -1,21 +1,15 @@
 <?php
 
-namespace DP\ObserverBundle\Entity\Observer;
+namespace DP\SfObserverBundle\Listener;
 
-use DP\ObserverBundle\Interfaces\Observer;
-use DP\ObserverBundle\AbstractClass\Observable;
-use DP\ObserverBundle\Entity\Observable\DonneesMeteo;
+use DP\SfObserverBundle\Event\DonneesMeteoEvent;
 
-/**
- * AffichageConditions
- *
- */
-class AffichagePrevisions implements Observer
+class AffichagePrevisionsListener
 {
     private $currentPressure;
     private $lastPressure;
     private $prevision;
-    
+
     function getCurrentPressure()
     {
         return $this->currentPressure;
@@ -25,25 +19,24 @@ class AffichagePrevisions implements Observer
     {
         return $this->lastPressure;
     }
-    
+
     function getPrevision()
     {
         return $this->prevision;
     }
 
-    public function __construct(Observable $observable, $currentPressure)
+    public function __construct($currentPressure)
     {
         $this->currentPressure = $currentPressure;
-        $observable->attach($this);
+//        $observable->attach($this);
     }
 
-    public function update(Observable $observable)
+    public function update(DonneesMeteoEvent $event)
     {
-        if ($observable instanceof DonneesMeteo) {
-            $this->lastPressure    = $this->currentPressure;
-            $this->currentPressure = $observable->getPressure();
-            $this->getNewValues();
-        }
+        $donneesMeteo          = $event->getDonneesMeteo();
+        $this->lastPressure    = $this->currentPressure;
+        $this->currentPressure = $donneesMeteo->getPressure();
+        $this->getNewValues();
     }
 
     public function getNewValues()

@@ -8,16 +8,18 @@ namespace DP\SplObserverBundle\Entity\Observer;
  */
 class AffichageStats implements \SplObserver
 {
-    private $maxTemp = 0.0;
-    private $minTemp = 200;
+    private $maxTemp;
+    private $minTemp;
     private $sumTemp = 0.0;
     private $numReadings;
 
-    public function __construct(\SplSubject $observable)
+    public function __construct(\SplSubject $observable, $minTemp, $maxTemp)
     {
+        $this->minTemp = $minTemp;
+        $this->maxTemp = $maxTemp;
         $observable->attach($this);
     }
-    
+
     function getMaxTemp()
     {
         return $this->maxTemp;
@@ -33,7 +35,6 @@ class AffichageStats implements \SplObserver
         return $this->sumTemp;
     }
 
-    
     public function update(\SplSubject $observable)
     {
         if ($observable instanceof \DP\SplObserverBundle\Entity\Observable\DonneesMeteo) {
@@ -56,7 +57,7 @@ class AffichageStats implements \SplObserver
     public function getNewValues()
     {
         $temperature = ($this->sumTemp / $this->numReadings) . "/" . $this->maxTemp . "/" . $this->minTemp;
-        
+
         return array("AvgMaxMinTemperature" => $temperature);
     }
 

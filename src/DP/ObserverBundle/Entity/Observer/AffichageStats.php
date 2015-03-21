@@ -4,7 +4,6 @@ namespace DP\ObserverBundle\Entity\Observer;
 
 use DP\ObserverBundle\Interfaces\Observer;
 use DP\ObserverBundle\AbstractClass\Observable;
-use DP\ObserverBundle\Entity\Observable\DonneesMeteo;
 
 /**
  * AffichageConditions
@@ -12,16 +11,18 @@ use DP\ObserverBundle\Entity\Observable\DonneesMeteo;
  */
 class AffichageStats implements Observer
 {
-    private $maxTemp = 0.0;
-    private $minTemp = 200;
+    private $maxTemp;
+    private $minTemp;
     private $sumTemp = 0.0;
     private $numReadings;
 
-    public function __construct(Observable $observable)
+    public function __construct(Observable $observable, $minTemp, $maxTemp)
     {
+        $this->minTemp = $minTemp;
+        $this->maxTemp = $maxTemp;
         $observable->attach($this);
     }
-    
+
     function getMaxTemp()
     {
         return $this->maxTemp;
@@ -36,11 +37,10 @@ class AffichageStats implements Observer
     {
         return $this->sumTemp;
     }
-
     
     public function update(Observable $observable)
     {
-        if ($observable instanceof DonneesMeteo) {
+        if ($observable instanceof \DP\ObserverBundle\Entity\Observable\DonneesMeteo) {
             $temp = $observable->getTemperature();
             $this->sumTemp += $temp;
             $this->numReadings++;

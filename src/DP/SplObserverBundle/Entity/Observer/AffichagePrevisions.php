@@ -8,7 +8,7 @@ namespace DP\SplObserverBundle\Entity\Observer;
  */
 class AffichagePrevisions implements \SplObserver
 {
-    private $currentPressure = 29.92;
+    private $currentPressure;
     private $lastPressure;
     private $prevision;
     
@@ -26,10 +26,10 @@ class AffichagePrevisions implements \SplObserver
     {
         return $this->prevision;
     }
-
     
-    public function __construct(\SplSubject $observable)
+    public function __construct(\SplSubject $observable, $currentPressure)
     {
+        $this->currentPressure = $currentPressure;
         $observable->attach($this);
     }
 
