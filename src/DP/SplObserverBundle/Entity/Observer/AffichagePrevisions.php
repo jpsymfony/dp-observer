@@ -2,9 +2,6 @@
 
 namespace DP\SplObserverBundle\Entity\Observer;
 
-use DP\SplObserverBundle\AbstractClass\Observable;
-use DP\SplObserverBundle\Entity\Observable\DonneesMeteo;
-
 /**
  * AffichageConditions
  *
@@ -38,7 +35,7 @@ class AffichagePrevisions implements \SplObserver
 
     public function update(\SplSubject $observable)
     {
-        if ($observable instanceof DonneesMeteo) {
+        if ($observable instanceof \DP\SplObserverBundle\Entity\Observable\DonneesMeteo) {
             $this->lastPressure    = $this->currentPressure;
             $this->currentPressure = $observable->getPressure();
             $this->getNewValues();

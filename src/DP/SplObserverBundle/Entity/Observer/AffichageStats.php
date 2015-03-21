@@ -2,9 +2,6 @@
 
 namespace DP\SplObserverBundle\Entity\Observer;
 
-use DP\SplObserverBundle\AbstractClass\Observable;
-use DP\SplObserverBundle\Entity\Observable\DonneesMeteo;
-
 /**
  * AffichageConditions
  *
@@ -16,7 +13,7 @@ class AffichageStats implements \SplObserver
     private $sumTemp = 0.0;
     private $numReadings;
 
-    public function __construct(Observable $observable)
+    public function __construct(\SplSubject $observable)
     {
         $observable->attach($this);
     }
@@ -39,7 +36,7 @@ class AffichageStats implements \SplObserver
     
     public function update(\SplSubject $observable)
     {
-        if ($observable instanceof DonneesMeteo) {
+        if ($observable instanceof \DP\SplObserverBundle\Entity\Observable\DonneesMeteo) {
             $temp = $observable->getTemperature();
             $this->sumTemp += $temp;
             $this->numReadings++;

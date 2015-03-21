@@ -2,8 +2,6 @@
 
 namespace DP\SplObserverBundle\Entity\Observer;
 
-use DP\SplObserverBundle\AbstractClass\Observable;
-
 /**
  * AffichageConditions
  *
@@ -36,7 +34,7 @@ class AffichageConditions implements \SplObserver
 
     public function update(\SplSubject $observable)
     {
-        if ($observable instanceof \DP\ObserverBundle\Entity\Observable\DonneesMeteo) {
+        if ($observable instanceof \DP\SplObserverBundle\Entity\Observable\DonneesMeteo) {
             $this->temperature = $observable->getTemperature();
             $this->humidite    = $observable->getHumidity();
             $this->pression    = $observable->getPressure();
