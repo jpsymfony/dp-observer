@@ -33,7 +33,7 @@ class DefaultController extends Controller
 
         $donneesMeteo = new DonneesMeteo();
         $donneesMeteo->setDispatcher($dispatcher);
-        $donneesMeteo->setMesures(25, 10, 1200); // le sujet met à jour ses données;
+        $donneesMeteo->setMesures(25, 10, 1200); // le sujet met à jour ses données
 
         return array(
             'affichageConditions' => $affichageConditionsListener[0],
