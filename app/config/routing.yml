@@ -1,5 +1,10 @@
 dp_observer:
     resource: "@DPObserverBundle/Controller/"
     type:     annotation
-    prefix:   /
+    prefix:   /custom-observer
+
+dp_spl_observer:
+    resource: "@DPSplObserverBundle/Controller/"
+    type:     annotation
+    prefix:   /spl-observer
 
