@@ -42,4 +42,35 @@ class DefaultController extends Controller
         );
     }
 
+    /**
+     * @Route("/subscriber")
+     * @Template("DPSfObserverBundle:Default:index.html.twig")
+     */
+    public function indexSubscriberAction()
+    {
+        $dispatcher = new EventDispatcher();
+
+        $donneesMeteo = new DonneesMeteo();
+        
+        // déclaration des subscribers
+        $affichageConditionsSubscriber   = new \DP\SfObserverBundle\Subscriber\AffichageConditionsSubscriber();
+        $affichageStatsSubscriber   = new \DP\SfObserverBundle\Subscriber\AffichageStatsSubscriber(200, 0.0);
+        $affichagePrevisionsSubscriber   = new \DP\SfObserverBundle\Subscriber\AffichagePrevisionsSubscriber(29.2);
+        
+        // enregistrement des subscribers
+        $dispatcher->addSubscriber($affichageConditionsSubscriber);
+        $dispatcher->addSubscriber($affichageStatsSubscriber);
+        $dispatcher->addSubscriber($affichagePrevisionsSubscriber);
+        
+        
+        $donneesMeteo->setDispatcher($dispatcher);
+        $donneesMeteo->setMesures(25, 10, 1200); // le sujet met à jour ses données
+
+        return array(
+            'affichageConditions' => $affichageConditionsSubscriber,
+            'affichageStats'      => $affichageStatsSubscriber,
+            'affichagePrevisions' => $affichagePrevisionsSubscriber
+        );
+    }
+
 }
