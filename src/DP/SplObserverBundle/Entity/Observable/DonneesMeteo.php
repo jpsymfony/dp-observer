@@ -1,8 +1,8 @@
 <?php
 
-namespace DP\ObserverBundle\Entity\Observable;
+namespace DP\SplObserverBundle\Entity\Observable;
 
-use DP\ObserverBundle\AbstractClass\Observable;
+use DP\SplObserverBundle\AbstractClass\Observable;
 
 /**
  * DonneesMeteo => celui qui est observé

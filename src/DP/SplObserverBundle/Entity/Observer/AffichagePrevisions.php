@@ -1,16 +1,15 @@
 <?php
 
-namespace DP\ObserverBundle\Entity\Observer;
+namespace DP\SplObserverBundle\Entity\Observer;
 
-use DP\ObserverBundle\Interfaces\Observer;
-use DP\ObserverBundle\AbstractClass\Observable;
-use DP\ObserverBundle\Entity\Observable\DonneesMeteo;
+use DP\SplObserverBundle\AbstractClass\Observable;
+use DP\SplObserverBundle\Entity\Observable\DonneesMeteo;
 
 /**
  * AffichageConditions
  *
  */
-class AffichagePrevisions implements Observer
+class AffichagePrevisions implements \SplObserver
 {
     private $currentPressure = 29.92;
     private $lastPressure;
@@ -32,12 +31,12 @@ class AffichagePrevisions implements Observer
     }
 
     
-    public function __construct(Observable $observable)
+    public function __construct(\SplSubject $observable)
     {
         $observable->attach($this);
     }
 
-    public function update(Observable $observable)
+    public function update(\SplSubject $observable)
     {
         if ($observable instanceof DonneesMeteo) {
             $this->lastPressure    = $this->currentPressure;

@@ -1,16 +1,15 @@
 <?php
 
-namespace DP\ObserverBundle\Entity\Observer;
+namespace DP\SplObserverBundle\Entity\Observer;
 
-use DP\ObserverBundle\Interfaces\Observer;
-use DP\ObserverBundle\AbstractClass\Observable;
-use DP\ObserverBundle\Entity\Observable\DonneesMeteo;
+use DP\SplObserverBundle\AbstractClass\Observable;
+use DP\SplObserverBundle\Entity\Observable\DonneesMeteo;
 
 /**
  * AffichageConditions
  *
  */
-class AffichageStats implements Observer
+class AffichageStats implements \SplObserver
 {
     private $maxTemp = 0.0;
     private $minTemp = 200;
@@ -38,7 +37,7 @@ class AffichageStats implements Observer
     }
 
     
-    public function update(Observable $observable)
+    public function update(\SplSubject $observable)
     {
         if ($observable instanceof DonneesMeteo) {
             $temp = $observable->getTemperature();

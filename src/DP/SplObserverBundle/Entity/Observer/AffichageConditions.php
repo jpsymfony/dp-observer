@@ -1,16 +1,14 @@
 <?php
 
-namespace DP\ObserverBundle\Entity\Observer;
+namespace DP\SplObserverBundle\Entity\Observer;
 
-use DP\ObserverBundle\Interfaces\Observer;
-use DP\ObserverBundle\AbstractClass\Observable;
-use Doctrine\ORM\Mapping as ORM;
+use DP\SplObserverBundle\AbstractClass\Observable;
 
 /**
  * AffichageConditions
  *
  */
-class AffichageConditions implements Observer
+class AffichageConditions implements \SplObserver
 {
     private $temperature;
     private $humidite;
@@ -31,12 +29,12 @@ class AffichageConditions implements Observer
         return $this->pression;
     }
 
-    public function __construct(Observable $observable)
+    public function __construct(\SplSubject $observable)
     {
         $observable->attach($this);
     }
 
-    public function update(Observable $observable)
+    public function update(\SplSubject $observable)
     {
         if ($observable instanceof \DP\ObserverBundle\Entity\Observable\DonneesMeteo) {
             $this->temperature = $observable->getTemperature();
