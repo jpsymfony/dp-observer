@@ -3,14 +3,30 @@
 <container xmlns="http://symfony.com/schema/dic/services"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
-
-    <!--
+    <parameters>
+        <parameter key="dp.donnees_meteo.class">DP\SfObserverBundle\Entity\Observable\DonneesMeteo</parameter>
+        <parameter key="dp.affichage_condition_listener.class">DP\SfObserverBundle\Listener\AffichageConditionsListener</parameter>
+        <parameter key="dp.affichage_prevision_listener.class">DP\SfObserverBundle\Listener\AffichagePrevisionsListener</parameter>
+        <parameter key="dp.affichage_stat_listener.class">DP\SfObserverBundle\Listener\AffichageStatsListener</parameter>
+    </parameters>
     <services>
-        <service id="dp_sf_observer.example" class="DP\SfObserverBundle\Example">
-            <argument type="service" id="service_id" />
-            <argument>plain_value</argument>
-            <argument>%parameter_name%</argument>
+        <service id="dp.donnees_meteo"
+                 class="%dp.donnees_meteo.class%">
+            <call method="setDispatcher">
+             <argument type="service" id="event_dispatcher" />
+            </call>
+        </service>
+        <service id="dp.affichage_condition_listener"
+                 class="%dp.affichage_condition_listener.class%">
+            <tag name="kernel.event_listener" event="donnees_meteo.update" method="update" />
+        </service>
+        <service id="dp.affichage_prevision_listener"
+                 class="%dp.affichage_prevision_listener.class%">
+            <tag name="kernel.event_listener" event="donnees_meteo.update" method="update" />
+        </service>
+        <service id="dp.affichage_stat_listener"
+                 class="%dp.affichage_stat_listener.class%">
+            <tag name="kernel.event_listener" event="donnees_meteo.update" method="update" />
         </service>
     </services>
-    -->
 </container>

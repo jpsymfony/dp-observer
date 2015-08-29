@@ -11,24 +11,27 @@ class AffichageStatsListener
     private $sumTemp = 0.0;
     private $numReadings;
 
-    public function __construct($minTemp, $maxTemp)
+     public function setMaxTemp($maxTemp)
     {
-        $this->minTemp = $minTemp;
         $this->maxTemp = $maxTemp;
-//        $observable->attach($this);
     }
 
-    function getMaxTemp()
+    public function getMaxTemp()
     {
         return $this->maxTemp;
     }
 
-    function getMinTemp()
+    public function setMinTemp($minTemp)
+    {
+        $this->minTemp = $minTemp;
+    }
+
+    public function getMinTemp()
     {
         return $this->minTemp;
     }
 
-    function getSumTemp()
+    public function getSumTemp()
     {
         return $this->sumTemp;
     }
@@ -47,8 +50,6 @@ class AffichageStatsListener
         if ($temp < $this->minTemp) {
             $this->minTemp = $temp;
         }
-
-        $this->getNewValues();
     }
 
     public function getNewValues()

@@ -20,25 +20,22 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
-        //déclaration des écouteurs
-        $affichageConditionsListener = array(new AffichageConditionsListener(), 'update');
-        $affichageStatsListener      = array(new AffichageStatsListener(200, 0.0), 'update');
-        $affichagePrevisionsListener = array(new AffichagePrevisionsListener(29.2), 'update');
+        // déclaration des paramètres des écouteurs
+        $this->container->get('dp.affichage_prevision_listener')->setCurrentPressure(1000);
+        $this->container->get('dp.affichage_stat_listener')->setMinTemp(10);
+        $this->container->get('dp.affichage_stat_listener')->setMaxTemp(30);
 
-        // enregistrement des écouteurs
-        $dispatcher = new EventDispatcher();
-        $dispatcher->addListener('donnees_meteo.update', $affichageConditionsListener);
-        $dispatcher->addListener('donnees_meteo.update', $affichagePrevisionsListener);
-        $dispatcher->addListener('donnees_meteo.update', $affichageStatsListener);
-
-        $donneesMeteo = new DonneesMeteo();
-        $donneesMeteo->setDispatcher($dispatcher);
+        $donneesMeteo = $this->container->get('dp.donnees_meteo');
         $donneesMeteo->setMesures(25, 10, 1200); // le sujet met à jour ses données
 
+        $affichageConditions = $this->container->get('dp.affichage_condition_listener')->getNewValues();
+        $affichageStats = $this->container->get('dp.affichage_stat_listener')->getNewValues();
+        $affichagePrevisions = $this->container->get('dp.affichage_prevision_listener')->getNewValues();
+
         return array(
-            'affichageConditions' => $affichageConditionsListener[0],
-            'affichageStats'      => $affichageStatsListener[0],
-            'affichagePrevisions' => $affichagePrevisionsListener[0]
+            'affichageConditions' => $affichageConditions,
+            'affichageStats'      => $affichageStats,
+            'affichagePrevisions' => $affichagePrevisions
         );
     }
 

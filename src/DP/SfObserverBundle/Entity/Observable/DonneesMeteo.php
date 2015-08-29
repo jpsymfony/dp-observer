@@ -2,7 +2,7 @@
 
 namespace DP\SfObserverBundle\Entity\Observable;
 
-use Symfony\Component\EventDispatcher\EventDispatcher;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use DP\SfObserverBundle\Event\DonneesMeteoEvent;
 
 /**
@@ -30,7 +30,7 @@ class DonneesMeteo
         return $this->pressure;
     }
 
-    function setDispatcher(EventDispatcher $dispatcher)
+    function setDispatcher(EventDispatcherInterface $dispatcher)
     {
         $this->dispatcher = $dispatcher;
     }

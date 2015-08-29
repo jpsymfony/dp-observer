@@ -15,6 +15,11 @@ class AffichagePrevisionsListener
         return $this->currentPressure;
     }
 
+        public function setCurrentPressure($currentPressure)
+    {
+        $this->currentPressure = $currentPressure;
+    }
+
     function getLastPressure()
     {
         return $this->lastPressure;
@@ -25,18 +30,11 @@ class AffichagePrevisionsListener
         return $this->prevision;
     }
 
-    public function __construct($currentPressure)
-    {
-        $this->currentPressure = $currentPressure;
-//        $observable->attach($this);
-    }
-
     public function update(DonneesMeteoEvent $event)
     {
         $donneesMeteo          = $event->getDonneesMeteo();
         $this->lastPressure    = $this->currentPressure;
         $this->currentPressure = $donneesMeteo->getPressure();
-        $this->getNewValues();
     }
 
     public function getNewValues()
@@ -49,7 +47,7 @@ class AffichagePrevisionsListener
             $this->prevision = "Watch out for cooler, rainy weather";
         }
 
-        return $this->prevision;
+        return array('prevision' =>$this->prevision);
     }
 
 }
