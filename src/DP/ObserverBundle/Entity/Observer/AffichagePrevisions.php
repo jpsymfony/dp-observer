@@ -34,7 +34,7 @@ class AffichagePrevisions implements Observer
     public function __construct(Observable $observable, $currentPressure)
     {
         $this->currentPressure = $currentPressure;
-        $observable->attach($this);
+        $observable->addObservers($this);
     }
 
     public function update(Observable $observable)

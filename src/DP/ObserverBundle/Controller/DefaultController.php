@@ -24,7 +24,7 @@ class DefaultController extends Controller
         // plutôt que d'appeler la fonction $affichageConditions->add($donneesMeteo)
         $affichageStats      = new AffichageStats($donneesMeteo, 10, 30); // l'observateur, à qui on passe l'observé en argument
         // plutôt que d'appeler la fonction $affichageStats->add($donneesMeteo)
-        $affichagePrevisions = new AffichagePrevisions($donneesMeteo, 29.2); // l'observateur, à qui on passe l'observé en argument 
+        $affichagePrevisions = new AffichagePrevisions($donneesMeteo, 1000); // l'observateur, à qui on passe l'observé en argument
         // plutôt que d'appeler la fonction $affichagePrevisions->add($donneesMeteo)
 
         $donneesMeteo->setMesures(25, 10, 1200); // le sujet met à jour ses données

@@ -51,7 +51,7 @@ class DonneesMeteo extends Observable
         $this->humidity    = $humidity;
         $this->pressure    = $pressure;
         $this->setChanged();
-        $this->notify();
+        $this->notifyObservers();
     }
 
 }

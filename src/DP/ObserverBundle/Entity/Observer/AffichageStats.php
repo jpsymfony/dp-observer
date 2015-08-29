@@ -20,7 +20,7 @@ class AffichageStats implements Observer
     {
         $this->minTemp = $minTemp;
         $this->maxTemp = $maxTemp;
-        $observable->attach($this);
+        $observable->addObservers($this);
     }
 
     function getMaxTemp()

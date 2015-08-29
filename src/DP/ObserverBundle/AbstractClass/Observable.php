@@ -11,24 +11,24 @@ abstract class Observable
      *
      * @var arrayCollection
      */
-    private $observables;
+    private $observers;
     private $changed;
 
     public function __construct()
     {
-        $this->observables = new ArrayCollection();
+        $this->observers = new ArrayCollection();
         $this->changed     = false;
     }
 
-    public function attach(Observer $observer)
+    public function addObservers(Observer $observer)
     {
-        $this->observables->add($observer);
+        $this->observers->add($observer);
     }
 
-    public function notify()
+    public function notifyObservers()
     {
         if ($this->hasChanged()) {
-            foreach ($this->observables as $observer) {
+            foreach ($this->observers as $observer) {
                 $observer->update($this);
             }
         }
@@ -37,7 +37,7 @@ abstract class Observable
 
     public function detach(Observer $observer)
     {
-        $this->observables->remove($observer);
+        $this->observers->remove($observer);
     }
 
     public function hasChanged()

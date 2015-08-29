@@ -4,7 +4,6 @@ namespace DP\ObserverBundle\Entity\Observer;
 
 use DP\ObserverBundle\Interfaces\Observer;
 use DP\ObserverBundle\AbstractClass\Observable;
-use Doctrine\ORM\Mapping as ORM;
 
 /**
  * AffichageConditions
@@ -13,8 +12,8 @@ use Doctrine\ORM\Mapping as ORM;
 class AffichageConditions implements Observer
 {
     private $temperature;
-    private $humidite;
-    private $pression;
+    private $humidity;
+    private $pressure;
 
     function getTemperature()
     {
@@ -23,12 +22,12 @@ class AffichageConditions implements Observer
 
     function getHumidite()
     {
-        return $this->humidite;
+        return $this->humidity;
     }
 
     function getPression()
     {
-        return $this->pression;
+        return $this->pressure;
     }
     
     function setCurrentPressure($currentPressure)
@@ -38,21 +37,21 @@ class AffichageConditions implements Observer
 
     public function __construct(Observable $observable)
     {
-        $observable->attach($this);
+        $observable->addObservers($this);
     }
 
     public function update(Observable $observable)
     {
         if ($observable instanceof \DP\ObserverBundle\Entity\Observable\DonneesMeteo) {
             $this->temperature = $observable->getTemperature();
-            $this->humidite    = $observable->getHumidity();
-            $this->pression    = $observable->getPressure();
+            $this->humidity    = $observable->getHumidity();
+            $this->pressure    = $observable->getPressure();
         }
     }
 
     public function getNewValues()
     {
-        return array('temperature' => $this->temperature, 'humidite' => $this->humidite, 'pression' => $this->pression);
+        return array('temperature' => $this->temperature, 'humidite' => $this->humidity, 'pression' => $this->pressure);
     }
 
 }
