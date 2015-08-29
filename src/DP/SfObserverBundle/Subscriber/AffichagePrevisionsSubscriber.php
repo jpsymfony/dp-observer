@@ -18,24 +18,24 @@ class AffichagePrevisionsSubscriber implements EventSubscriberInterface
         );
     }
 
-    function getCurrentPressure()
+    public function getCurrentPressure()
     {
         return $this->currentPressure;
     }
 
-    function getLastPressure()
+    public function setCurrentPressure($currentPressure)
+    {
+        $this->currentPressure = $currentPressure;
+    }
+
+    public function getLastPressure()
     {
         return $this->lastPressure;
     }
 
-    function getPrevision()
+    public function getPrevision()
     {
         return $this->prevision;
-    }
-
-    public function __construct($currentPressure)
-    {
-        $this->currentPressure = $currentPressure;
     }
 
     public function update(DonneesMeteoEvent $event)
@@ -43,7 +43,6 @@ class AffichagePrevisionsSubscriber implements EventSubscriberInterface
         $donneesMeteo          = $event->getDonneesMeteo();
         $this->lastPressure    = $this->currentPressure;
         $this->currentPressure = $donneesMeteo->getPressure();
-        $this->getNewValues();
     }
 
     public function getNewValues()
@@ -56,7 +55,7 @@ class AffichagePrevisionsSubscriber implements EventSubscriberInterface
             $this->prevision = "Watch out for cooler, rainy weather";
         }
 
-        return $this->prevision;
+        return array('prevision' =>$this->prevision);
     }
 
 }

@@ -43,8 +43,6 @@ class DonneesMeteo
         $event             = new DonneesMeteoEvent($this);
 
         $this->dispatcher->dispatch('donnees_meteo.update', $event);
-//        $this->setChanged();
-//        $this->notify();
     }
 
 }

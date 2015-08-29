@@ -10,7 +10,7 @@ class AffichagePrevisionsListener
     private $lastPressure;
     private $prevision;
 
-    function getCurrentPressure()
+    public function getCurrentPressure()
     {
         return $this->currentPressure;
     }
@@ -20,12 +20,12 @@ class AffichagePrevisionsListener
         $this->currentPressure = $currentPressure;
     }
 
-    function getLastPressure()
+    public function getLastPressure()
     {
         return $this->lastPressure;
     }
 
-    function getPrevision()
+    public function getPrevision()
     {
         return $this->prevision;
     }

@@ -8,6 +8,9 @@
         <parameter key="dp.affichage_condition_listener.class">DP\SfObserverBundle\Listener\AffichageConditionsListener</parameter>
         <parameter key="dp.affichage_prevision_listener.class">DP\SfObserverBundle\Listener\AffichagePrevisionsListener</parameter>
         <parameter key="dp.affichage_stat_listener.class">DP\SfObserverBundle\Listener\AffichageStatsListener</parameter>
+        <parameter key="dp.affichage_condition_subscriber.class">DP\SfObserverBundle\Subscriber\AffichageConditionsSubscriber</parameter>
+        <parameter key="dp.affichage_prevision_subscriber.class">DP\SfObserverBundle\Subscriber\AffichagePrevisionsSubscriber</parameter>
+        <parameter key="dp.affichage_stat_subscriber.class">DP\SfObserverBundle\Subscriber\AffichageStatsSubscriber</parameter>
     </parameters>
     <services>
         <service id="dp.donnees_meteo"
@@ -27,6 +30,18 @@
         <service id="dp.affichage_stat_listener"
                  class="%dp.affichage_stat_listener.class%">
             <tag name="kernel.event_listener" event="donnees_meteo.update" method="update" />
+        </service>
+        <service id="dp.affichage_condition_subscriber"
+                 class="%dp.affichage_condition_subscriber.class%">
+            <tag name="kernel.event_subscriber" />
+        </service>
+        <service id="dp.affichage_prevision_subscriber"
+                 class="%dp.affichage_prevision_subscriber.class%">
+            <tag name="kernel.event_subscriber" />
+        </service>
+        <service id="dp.affichage_stat_subscriber"
+                 class="%dp.affichage_stat_subscriber.class%">
+            <tag name="kernel.event_subscriber" />
         </service>
     </services>
 </container>

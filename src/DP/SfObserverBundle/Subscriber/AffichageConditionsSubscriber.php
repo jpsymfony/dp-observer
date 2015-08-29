@@ -7,6 +7,39 @@ use DP\SfObserverBundle\Event\DonneesMeteoEvent;
 
 class AffichageConditionsSubscriber implements EventSubscriberInterface
 {
+    private $temperature;
+    private $humidite;
+    private $pression;
+
+    public function getTemperature()
+    {
+        return $this->temperature;
+    }
+
+    public function getHumidite()
+    {
+        return $this->humidite;
+    }
+
+    public function getPression()
+    {
+        return $this->pression;
+    }
+
+    public function setTemperature($temperature)
+    {
+        $this->temperature = $temperature;
+    }
+
+    public function setHumidite($humidite)
+    {
+        $this->humidite = $humidite;
+    }
+
+    public function setPression($pression)
+    {
+        $this->pression = $pression;
+    }
 
     static public function getSubscribedEvents()
     {
@@ -21,7 +54,6 @@ class AffichageConditionsSubscriber implements EventSubscriberInterface
         $this->temperature = $donneesMeteo->getTemperature();
         $this->humidite    = $donneesMeteo->getHumidity();
         $this->pression    = $donneesMeteo->getPressure();
-        $this->getNewValues();
     }
 
     public function getNewValues()

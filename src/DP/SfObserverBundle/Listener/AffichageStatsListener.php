@@ -16,7 +16,7 @@ class AffichageStatsListener
         $this->maxTemp = $maxTemp;
     }
 
-    function getMaxTemp()
+    public function getMaxTemp()
     {
         return $this->maxTemp;
     }
