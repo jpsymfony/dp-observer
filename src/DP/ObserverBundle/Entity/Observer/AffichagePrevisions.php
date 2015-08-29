@@ -42,7 +42,6 @@ class AffichagePrevisions implements Observer
         if ($observable instanceof DonneesMeteo) {
             $this->lastPressure    = $this->currentPressure;
             $this->currentPressure = $observable->getPressure();
-            $this->getNewValues();
         }
     }
 
@@ -56,7 +55,7 @@ class AffichagePrevisions implements Observer
             $this->prevision = "Watch out for cooler, rainy weather";
         }
 
-        return $this->prevision;
+        return array('prevision' => $this->prevision);
     }
 
 }

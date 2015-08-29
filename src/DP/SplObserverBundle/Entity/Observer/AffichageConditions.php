@@ -38,7 +38,6 @@ class AffichageConditions implements \SplObserver
             $this->temperature = $observable->getTemperature();
             $this->humidite    = $observable->getHumidity();
             $this->pression    = $observable->getPressure();
-            $this->getNewValues();
         }
     }
 

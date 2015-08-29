@@ -49,8 +49,6 @@ class AffichageStats implements \SplObserver
             if ($temp < $this->minTemp) {
                 $this->minTemp = $temp;
             }
-
-            $this->getNewValues();
         }
     }
 

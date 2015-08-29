@@ -47,7 +47,6 @@ class AffichageConditions implements Observer
             $this->temperature = $observable->getTemperature();
             $this->humidite    = $observable->getHumidity();
             $this->pression    = $observable->getPressure();
-            $this->getNewValues();
         }
     }
 

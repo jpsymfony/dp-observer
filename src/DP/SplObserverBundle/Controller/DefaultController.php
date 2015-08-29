@@ -22,7 +22,7 @@ class DefaultController extends Controller
         $donneesMeteo        = new DonneesMeteo(); // sujet, celui qui est observé
         $affichageConditions = new AffichageConditions($donneesMeteo); // l'observateur, à qui on passe l'observé en argument 
         // plutôt que d'appeler la fonction $affichageConditions->add($donneesMeteo)
-        $affichageStats      = new AffichageStats($donneesMeteo, 200, 0.0); // l'observateur, à qui on passe l'observé en argument 
+        $affichageStats      = new AffichageStats($donneesMeteo, 10, 30); // l'observateur, à qui on passe l'observé en argument
         // plutôt que d'appeler la fonction $affichageStats->add($donneesMeteo)
         $affichagePrevisions = new AffichagePrevisions($donneesMeteo, 29.2); // l'observateur, à qui on passe l'observé en argument 
         // plutôt que d'appeler la fonction $affichagePrevisions->add($donneesMeteo)
@@ -30,9 +30,9 @@ class DefaultController extends Controller
         $donneesMeteo->setMesures(25, 10, 1200); // le sujet met à jour ses données
 
         return array(
-            'affichageConditions' => $affichageConditions,
-            'affichageStats'      => $affichageStats,
-            'affichagePrevisions' => $affichagePrevisions
+            'affichageConditions' => $affichageConditions->getNewValues(),
+            'affichageStats'      => $affichageStats->getNewValues(),
+            'affichagePrevisions' => $affichagePrevisions->getNewValues()
         );
     }
 

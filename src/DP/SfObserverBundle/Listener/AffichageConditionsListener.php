@@ -10,14 +10,6 @@ class AffichageConditionsListener
     private $humidite;
     private $pression;
 
-    public function update(DonneesMeteoEvent $event)
-    {
-        $donneesMeteo = $event->getDonneesMeteo();
-        $this->setTemperature($donneesMeteo->getTemperature());
-        $this->setHumidite($donneesMeteo->getHumidity());
-        $this->setPression($donneesMeteo->getPressure());
-    }
-
     public function getTemperature()
     {
         return $this->temperature;
@@ -46,6 +38,14 @@ class AffichageConditionsListener
     public function setPression($pression)
     {
         $this->pression = $pression;
+    }
+
+    public function update(DonneesMeteoEvent $event)
+    {
+        $donneesMeteo      = $event->getDonneesMeteo();
+        $this->temperature = $donneesMeteo->getTemperature();
+        $this->humidite    = $donneesMeteo->getHumidity();
+        $this->pression    = $donneesMeteo->getPressure();
     }
 
     public function getNewValues()

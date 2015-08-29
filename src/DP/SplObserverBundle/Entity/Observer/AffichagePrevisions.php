@@ -38,7 +38,6 @@ class AffichagePrevisions implements \SplObserver
         if ($observable instanceof \DP\SplObserverBundle\Entity\Observable\DonneesMeteo) {
             $this->lastPressure    = $this->currentPressure;
             $this->currentPressure = $observable->getPressure();
-            $this->getNewValues();
         }
     }
 
@@ -52,7 +51,7 @@ class AffichagePrevisions implements \SplObserver
             $this->prevision = "Watch out for cooler, rainy weather";
         }
 
-        return $this->prevision;
+        return array('prevision' => $this->prevision);
     }
 
 }

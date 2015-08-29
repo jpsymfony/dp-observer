@@ -15,7 +15,7 @@ class AffichagePrevisionsListener
         return $this->currentPressure;
     }
 
-        public function setCurrentPressure($currentPressure)
+    public function setCurrentPressure($currentPressure)
     {
         $this->currentPressure = $currentPressure;
     }

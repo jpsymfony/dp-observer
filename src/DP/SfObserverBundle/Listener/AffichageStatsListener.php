@@ -11,12 +11,12 @@ class AffichageStatsListener
     private $sumTemp = 0.0;
     private $numReadings;
 
-     public function setMaxTemp($maxTemp)
+    public function setMaxTemp($maxTemp)
     {
         $this->maxTemp = $maxTemp;
     }
 
-    public function getMaxTemp()
+    function getMaxTemp()
     {
         return $this->maxTemp;
     }
@@ -30,7 +30,6 @@ class AffichageStatsListener
     {
         return $this->minTemp;
     }
-
     public function getSumTemp()
     {
         return $this->sumTemp;
