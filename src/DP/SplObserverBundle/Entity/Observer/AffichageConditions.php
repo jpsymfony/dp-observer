@@ -9,22 +9,22 @@ namespace DP\SplObserverBundle\Entity\Observer;
 class AffichageConditions implements \SplObserver
 {
     private $temperature;
-    private $humidite;
-    private $pression;
+    private $humidity;
+    private $pressure;
 
     function getTemperature()
     {
         return $this->temperature;
     }
 
-    function getHumidite()
+    function getHumidity()
     {
-        return $this->humidite;
+        return $this->humidity;
     }
 
-    function getPression()
+    function getPressure()
     {
-        return $this->pression;
+        return $this->pressure;
     }
 
     public function __construct(\SplSubject $observable)
@@ -36,14 +36,14 @@ class AffichageConditions implements \SplObserver
     {
         if ($observable instanceof \DP\SplObserverBundle\Entity\Observable\DonneesMeteo) {
             $this->temperature = $observable->getTemperature();
-            $this->humidite    = $observable->getHumidity();
-            $this->pression    = $observable->getPressure();
+            $this->humidity    = $observable->getHumidity();
+            $this->pressure    = $observable->getPressure();
         }
     }
 
     public function getNewValues()
     {
-        return array('temperature' => $this->temperature, 'humidite' => $this->humidite, 'pression' => $this->pression);
+        return array('temperature' => $this->temperature, 'humidite' => $this->humidity, 'pression' => $this->pressure);
     }
 
 }

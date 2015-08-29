@@ -10,24 +10,24 @@ abstract class Observable implements \SplSubject
      *
      * @var arrayCollection
      */
-    private $observables;
+    private $observers;
     private $changed;
 
     public function __construct()
     {
-        $this->observables = new ArrayCollection();
+        $this->observers = new ArrayCollection();
         $this->changed     = false;
     }
 
     public function attach(\SplObserver $observer)
     {
-        $this->observables->add($observer);
+        $this->observers->add($observer);
     }
 
     public function notify()
     {
         if ($this->hasChanged()) {
-            foreach ($this->observables as $observer) {
+            foreach ($this->observers as $observer) {
                 $observer->update($this);
             }
         }
@@ -36,7 +36,7 @@ abstract class Observable implements \SplSubject
 
     public function detach(\SplObserver $observer)
     {
-        $this->observables->remove($observer);
+        $this->observers->remove($observer);
     }
 
     public function hasChanged()

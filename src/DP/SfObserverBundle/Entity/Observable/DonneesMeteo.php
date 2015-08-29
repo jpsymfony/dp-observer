@@ -4,6 +4,7 @@ namespace DP\SfObserverBundle\Entity\Observable;
 
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use DP\SfObserverBundle\Event\DonneesMeteoEvent;
+use DP\SfObserverBundle\DPSfObserverEvents;
 
 /**
  * DonneesMeteo => celui qui est observé
@@ -42,7 +43,7 @@ class DonneesMeteo
         $this->pressure    = $pressure;
         $event             = new DonneesMeteoEvent($this);
 
-        $this->dispatcher->dispatch('donnees_meteo.update', $event);
+        $this->dispatcher->dispatch(DPSfObserverEvents::MESURES_UPDATED, $event);
     }
 
 }

@@ -7,20 +7,20 @@ use DP\SfObserverBundle\Event\DonneesMeteoEvent;
 class AffichageConditionsListener
 {
     private $temperature;
-    private $humidite;
-    private $pression;
+    private $humidity;
+    private $pressure;
 
     public function getTemperature()
     {
         return $this->temperature;
     }
 
-    public function getHumidite()
+    public function getHumidity()
     {
-        return $this->humidite;
+        return $this->humidity;
     }
 
-    public function getPression()
+    public function getPressure()
     {
         return $this->pression;
     }
@@ -30,26 +30,26 @@ class AffichageConditionsListener
         $this->temperature = $temperature;
     }
 
-    public function setHumidite($humidite)
+    public function setHumidity($humidity)
     {
-        $this->humidite = $humidite;
+        $this->humidity = $humidity;
     }
 
-    public function setPression($pression)
+    public function setPressure($pressure)
     {
-        $this->pression = $pression;
+        $this->pressure = $pressure;
     }
 
     public function update(DonneesMeteoEvent $event)
     {
         $donneesMeteo      = $event->getDonneesMeteo();
         $this->temperature = $donneesMeteo->getTemperature();
-        $this->humidite    = $donneesMeteo->getHumidity();
-        $this->pression    = $donneesMeteo->getPressure();
+        $this->humidity    = $donneesMeteo->getHumidity();
+        $this->pressure    = $donneesMeteo->getPressure();
     }
 
     public function getNewValues()
     {
-        return array('temperature' => $this->temperature, 'humidite' => $this->humidite, 'pression' => $this->pression);
+        return array('temperature' => $this->temperature, 'humidite' => $this->humidity, 'pression' => $this->pressure);
     }
 }
